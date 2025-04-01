@@ -114,10 +114,10 @@ func main() {
 		// 检查文件是否已存在
 		if _, err := os.Stat(download_file_path); err == nil {
 			// 如果文件已存在，添加时间戳
-			timestamp := time.Now().Format("20060102150405")
+			timestamp := time.Now().UnixMilli()
 			ext := path.Ext(file_name)
 			base := strings.TrimSuffix(file_name, ext)
-			file_name = fmt.Sprintf("%s_%s%s", base, timestamp, ext)
+			file_name = fmt.Sprintf("%s_%d%s", base, timestamp, ext)
 			download_file_path = *download_dir + "/" + file_name
 		}
 		download_file, err := os.OpenFile(download_file_path, os.O_CREATE|os.O_WRONLY, 0666)
